@@ -1,5 +1,5 @@
 // MySQL connection
-var connect = require("../config/connection.js");
+var connection = require("../config/connection.js");
 
 // Function to create string of "?" for mySQL
 function questionMarks(num) {
@@ -13,14 +13,14 @@ function questionMarks(num) {
 }
 
 // Function to convert object key/value pairs to SQL syntax
-function sqlOb(ob) {
+function sqlOb(object) {
     var arr = [];
 
     //looping through keys and pushing the key/value as a string in arr
-    for (var key in ob) {
-        var value = ob[key];
+    for (var key in object) {
+        var value = object[key];
         //check to skip hidden properties
-        if (Object.hasOwnProperty.call(ob, key)) {
+        if (Object.hasOwnProperty.call(object, key)) {
             //if string with spaces, add quotations
             if (typeof value === "string" && value.indexOf(" ") >= 0) {
                 value = "'" + value + "'";
@@ -34,8 +34,8 @@ function sqlOb(ob) {
 
 // orm object for the SQL statement function
 var orm = {
-    selectAll: function (tableInput, cd) {
-        var querystring = "SELECT * FROM " + tableInput + ";";
+    selectAll: function (tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
