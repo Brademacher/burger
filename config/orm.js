@@ -16,7 +16,7 @@ function questionMarks(num) {
 function sqlOb(object) {
     var arr = [];
 
-    //looping through keys and pushing the key/value as a string in arr
+    //loop through keys and push the key/value as a string in array
     for (var key in object) {
         var value = object[key];
         //check to skip hidden properties
@@ -50,7 +50,7 @@ var orm = {
         queryString += cols.toString();
         queryString += ") ";
         queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
+        queryString += questionMarks(vals.length);
         queryString += ") ";
 
         console.log(queryString);
